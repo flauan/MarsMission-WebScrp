@@ -28,8 +28,8 @@ def scrape():
     collection.remove({})    
     listings_data = scrape_mars.scrape()    
     collection.insert_one(listings_data)      
-    # return redirect("http://127.0.0.1:5000/", code=302)
-    return redirect("https://fl-ru-webscrape-app.herokuapp.com/", code=302)
+    return redirect("http://127.0.0.1:5000/", code=302)
+    # return redirect("https://fl-ru-webscrape-app.herokuapp.com/", code=302)
 
 if __name__ == "__main__":
 
