@@ -1,0 +1,165 @@
+ <!--
+ Web Scraping and web rendering  with MongoDB   
+ Web Template
+ Initial Version:                         2017               
+ by Fervis lauan                                
+ -->
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, ini<body>tial-scale=1">
+
+    <title>Mission To Mars</title>
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <!--<link rel="stylesheet" href="WebVis_Style.css">-->
+
+    <!-- Latest compiled and minified JavaScript THIS WILL SOLVE DROPDOWN-->
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+     
+</head>
+
+<body>
+    <div class="container" style="width:1000px">
+        <div class="jumbotron" style="background: url(https://astrogeology.usgs.gov/images/backgrounds/mars.jpg) no-repeat center top #000">
+        <h1 style="color:#993333;text-align:center;font-size: 3em; font-weight: bold">Mission To Mars</h1>
+       
+        <p align="center"><a class="btn btn-primary btn-lg" href="http://127.0.0.1:5000/scrape" role="button">Scrape</a></p>
+        
+        </div>
+    </div>
+
+
+    <div class="container" id="cont1-fmt" style="width:1000px">
+        <div class="row">
+            <div class="col-sm-12" >                
+                <div class="panel panel-default">
+                    <div class="panel-heading panhd1-fmt" style="color:#000066;font-size: 1.5em; font-weight: bold">Latest Mars News</div>               
+                    <div class="panel-body">                                                                                    
+                        <ul style="list-style: none;">
+                            {% for listing in listings %}
+                            <li style="font-weight: bold">{{listing.new_title}}</li>
+                            <br>
+                            <li>{{listing.news_par}}</li>
+                            {% endfor %}
+                        </ul>                                                
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-8" >                
+                <div class="panel panel-default">
+                    <div class="panel-heading panhd1-fmt" style="color:#000066;font-size: 1.5em; font-weight: bold">Featured Mars Image</div>
+                    <div class="panel-body"> 
+                        <img src={% for listing in listings %}
+                                    {{listing.featrd_img_url}}
+                                 {% endfor %} alt="Mars" height="500" width="600">                                                                   
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-4" >                
+                <div class="panel panel-default">
+                    <div class="panel-heading panhd1-fmt" style="color:#000066;font-size: 1.2em; font-weight: bold">Current Weather on Mars</div>
+                    <div class="panel-body">                   
+                        <ul style="list-style: none;">
+                                {% for listing in listings %}
+                                <li>{{listing.mars_weather}}</li>                             
+                                {% endfor %}
+                        </ul>                             
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4" >                
+                <div class="panel panel-default">
+                    <div class="panel-heading panhd1-fmt" style="color:#000066;font-size: 1.2em; font-weight: bold">Mars Facts</div>
+                    <div class="panel-body">                   
+                        <!--Put Table here                        -->
+                        {% for listing in listings %}
+                             {{listing.mars_facts|safe}}
+                        {% endfor %}
+                        <!--End table here       -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12" >                
+                <div class="panel panel-default">
+                    <div class="panel-heading panhd1-fmt" style="color:#000066;font-size: 1.5em; font-weight: bold">Mars Hemispheres</div>
+                    <div class="panel-body">
+                        <div class="col-sm-6" > 
+                            <div class="panel panel-default">
+                                <img src={% for listing in listings %}
+                                            {{listing.hem_img_urls[0].img_url}}
+                                        {% endfor %}
+                                    alt="Mars" height="438" width="438">   
+                                <li style="font-size: 1.3em; font-weight: bold">{% for listing in listings %}
+                                            {{listing.hem_img_urls[0].title}}
+                                        {% endfor %}
+                                </li>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6" > 
+                            <div class="panel panel-default">
+                                <img src={% for listing in listings %}
+                                            {{listing.hem_img_urls[1].img_url}}
+                                        {% endfor %}                         
+                                    alt="Mars" height="438" width="438">      
+                                <li style="font-size: 1.3em; font-weight: bold">{% for listing in listings %}
+                                            {{listing.hem_img_urls[1].title}}
+                                        {% endfor %}
+                                </li>                            
+                            </div>                                 
+                        </div>
+        
+                        <div class="col-sm-6" > 
+                            <div class="panel panel-default">
+                                <img src={% for listing in listings %}
+                                            {{listing.hem_img_urls[2].img_url}}
+                                        {% endfor %}                         
+                                    alt="Mars" height="438" width="438">
+                                <li style="font-size: 1.3em; font-weight: bold">{% for listing in listings %}
+                                            {{listing.hem_img_urls[2].title}}
+                                        {% endfor %}
+                                </li>                            
+                            </div>
+                        </div>                
+                        <div class="col-sm-6" > 
+                            <div class="panel panel-default">
+                                <img src={% for listing in listings %}
+                                            {{listing.hem_img_urls[3].img_url}}
+                                        {% endfor %}                         
+                                    alt="Mars" height="438" width="438">
+                                <li style="font-size: 1.3em; font-weight: bold">{% for listing in listings %}
+                                            {{listing.hem_img_urls[3].title}}
+                                        {% endfor %}
+                                </li>
+                            </div>
+                        </div>  
+                    </div>   
+                </div>           
+            </div>            
+        </div>
+        <div class="panel panel-default" style="padding:10px;border:hidden">            
+
+            <div class="panel-heading panhd2-fmt" style="font-family: Times, serif;font-size: 1em;font-weight:normal;text-align:Right">
+
+                Fervis Lauan/Data Science  2017
+
+            </div>
+
+        </div>
+    </div>
+</body>    
